@@ -1,5 +1,4 @@
 *~
 *.pyc
-*.json
-wxGlade*
-wxPython*
+db.sqlite3
+__pycache__
