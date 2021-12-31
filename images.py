@@ -497,3 +497,35 @@ index.append('deletedocs')
 catalog['deletedocs'] = deletedocs
 
 #----------------------------------------------------------------------
+#----------------------------------------------------------------------
+aquaflagged = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAqFJ'
+    b'REFUOI2l00tIVHEUx/Hv/94715nxep0ZnXEcRkFrzOxhiUrWOqOwQJBopYQti8BoI0qUtajA'
+    b'FrWzFhVGz2VJywIzFB8hTotJCyl0tOaRj8kZ772tcnq467c8HD784HAEm+TM+X5rcDjKh48J'
+    b'ELlsLXNwoM7PzevHxd+7fwwuXHli3Xk0TX31DlqObaM0qAEw+3mJV4NzPH8dpr2llIudTeIf'
+    b'oOvSY+v67XnOnWqgprqIIq+DTMZEVgSKLIguppieSdB14y3nTxVzueuoAFB+AX0PvrCmb0Er'
+    b'dpOyK0zF0qAIsADDxGmzofl19u+rpK8/vNFaAjhxss+KpkpoOFjC1A+TN7EM4VWDd7E1xuNp'
+    b'JpdNRpNpxr+v46n2EFUCnGi/b200GHonQ72fIcvEr8pYPwwWJgaYenkP04Idja0U7T2CJMs8'
+    b'W8jAzkKGZpfZAOZ0HwQ19gU1hKSAojDx4i5fI8MApA2T5oZmosk0NX4H0VyFuVRBFjBD+dQG'
+    b'dcq8Try6immaGIaRPY9poqoypV4Nt+4gP7ZKNK5lgSpXgi3eCnwuO067So4iqDrUxuDDBACV'
+    b'jW0U5LswzHVycgwsy2J3bpyxX0Cl7RuBgjxceQ4cKthzTJpa26huPAwWFPt86E6FdUMlkUwj'
+    b'JJkV5rNAmbZMKv4JV3A7TjsoNoHXpxEMOgCQhUxmTZBaA0VWSUxNU6GvZM94tfO0WH4/gCKS'
+    b'eArA6xMU+iSKAzYCARvuQgl3oUDXQZaSLIUHuNZ1VmwAALu9MuNPbxGfe4/bCfkKuCXQJXCp'
+    b'4M6DRDTM6KNb7CmSN/+F3t5eayISwVdeTm1dHZW7dmEC4clJxkZGWJyZYW8oREdHx7+/8Hu6'
+    b'u7utSCRCLBYDwOPxEAqF6Onp2XT/v/ITL//mIw71OloAAAAASUVORK5CYII=')
+
+#----------------------------------------------------------------------
+aquanotflagged = PyEmbeddedImage(
+    b'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAh9J'
+    b'REFUOI2lk79KK0EUh7+ZnSHrIoqLiFVEoo0Qm9iksEnjY6TwDaxsrNKkstHGQsEX8C0sBUEE'
+    b'iQoqIiLRIiTObtydY3Fxc3Njd38wzcw53zlz/ih+0d7entze3vL29gZAHMdsbGywu7ur/rUd'
+    b'uzg4OJCbmxs2Nzep1WqUy2WUUjw8PHB5ecn5+Tnr6+tsb2+rCcDh4aG8vr6ytbVFvV4nCIKJ'
+    b'zK6vrzk7O2NpaYlms6kA9M9jt9ulXq+ztraG1hoRQUTw3henUqnQaDR4f38voBrg6OhIqtUq'
+    b'c3NzeO/p9/s453DO8fn5SZIkDAYDnHPMzMywvLzM6empFIA8z4njmKmpKXq9HkmSMBwOGQ6H'
+    b'5HlOkiR8fX3R7/fJsoyFhQXSNAXAAMzPzzM7O0sURQRBUDgopVBK4b0nz3OyLGN6ehqtNYuL'
+    b'iyNAFEWEYYi1FmMM1lq01iilyPMcYwxZlqG1LupjrR0B0jQliiKstQVE6z/1tdYiIgRBUECU'
+    b'UvR6vRGg2+2ORQ+CAGMMxpiiEyJSfMt7z8fHx6gLzjkeHx8Lx1KpRBiGBbBUKo0FeHp6wjk3'
+    b'PiTtdluen58lTVPx3stvyrJMXl5epN1uy9gcAIRhyPHxMZ1OB6UmRh6ATqfDyckJYRgWd2OW'
+    b'+/v7cnd3R6VSoVarUa1WAbi6uuLi4oL7+3tWVlbY2dmZ3IW/9bONP4WK45jV1VVardbvqf2P'
+    b'vgFEbRHlMuWkzQAAAABJRU5ErkJggg==')
+
