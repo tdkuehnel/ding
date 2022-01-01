@@ -1,0 +1,28 @@
+$fonts: (
+  "RobotoCondensed": (
+    (300 normal), (300 italic),
+	(400 normal), (400 italic),    
+    (700 normal), (700 italic),
+  )
+);
+
+@each $family, $variants in $fonts {
+  @each $variant in $variants {
+    @font-face {
+      $weight: nth($variant, 1);
+      $style: nth($variant, 2);
+      $filename: "../fonts/#{$family}/#{$weight}-#{$style}";
+
+      font-family: $family;
+      font-display: swap;
+      font-weight: $weight;
+      font-style: $style;
+      src: url("#{$filename}.eot");
+      src:
+        url("#{$filename}.woff2") format("woff2"),
+        url("#{$filename}.woff") format("woff"),
+        url("#{$filename}.ttf") format("truetype"),
+        url("#{$filename}.svg##{$family}") format("svg");
+    }
+  }
+}

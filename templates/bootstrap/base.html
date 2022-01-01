@@ -1,0 +1,62 @@
+{% load i18n static cache_bust %}
+
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:"de-de" }}">
+    <head>
+        <title>{% block title %}{{ title }}{% endblock %}</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="{% block stylesheet1 %}{% static "bootstrap/4.3.1/css/bootstrap.min.css"%}{% endblock %}"\>
+        <link rel="stylesheet" type="text/css" href="{% block stylesheet2 %}{% static "hauptanwendung/css/style.css"%}?{% cache_bust %}{% endblock %}"\>
+        <script src={% static "/chartjs/3.6.1/chart.js"%}></script>
+    </head>
+    
+    <body>
+
+        <header id="kopfzeile">
+            <div class="header">
+                {% block uberschrift %}
+                    <h4>{{ title }}</h4>
+                {% endblock %}
+            </div>
+        </header>
+    
+        <main role="main" class="container">
+            {% block navigation %}
+                {% include 'hauptanwendung/navigation.html' %}
+            {% endblock %}
+            {% block messages %}
+                {% if messages %}
+                    <aside class="alert alert-primary text-center" role="alert" id="mitteilungen">
+                        {% for message in messages %}
+                            <div class="mitteilung{% if message.tags %} {{ message.tags }}{% endif %}">{{ message|capfirst }}</div>
+                        {% endfor %}
+                    </aside>
+                {% endif %}
+            {% endblock messages %}
+
+            <article id="inhalt">
+                
+                {% block inhalt %}
+                    {{ content }}
+                {% endblock %}
+                
+                {% block debug %}
+                    {% include "hauptanwendung/debug.html" %}
+                {% endblock %}
+            </article>
+        </main>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        {% block chartjs %}{% endblock %}
+        <script src={% static "/jquery/jquery-3.0.0.slim.js"%}></script>
+        <script src={% static "/popper/popper-1.14.7.js"%}></script>
+        <script src={% static "/bootstrap/4.3.1/js/bootstrap.js"%}></script>
+    </body>
+</html>

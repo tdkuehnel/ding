@@ -1,0 +1,18 @@
+@use "sass:map";
+
+// __________________________________________________________________________ //
+// Abmessungen
+
+$mobile_breite: 768px;
+
+$nav_breite: 16em;
+$inhalt_mindesthohe: 580px;
+$zertifikat_mindestbreite: 640px;
+$fusszeile_mindesthohe: 2em;
+
+// __________________________________________________________________________ //
+// Farbpalette
+@import "farben";
+
+$basis_grund: $white;
+$basis_text: #304148;

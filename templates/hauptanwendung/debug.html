@@ -1,0 +1,20 @@
+{% if in_entwicklung %}
+<div class="entwicklung">
+    <span class="symbol-entwicklung"></span>
+    <p>
+        <strong>Session: {{request.session.session_key}}</strong><br>
+        <strong>Auth-ID: {{request.session.account_id}}</strong>
+        <h6>Besuchte Fragen</h6>
+        <ul>
+            {% for entry in request.session.instance.fragen.all %}
+                <li>{{entry}}</li>
+            {% endfor  %}
+            <div class="btn-group">
+                <a href="{% url 'reset_session' %}" class="btn btn-outline-success btn-sm">
+                    Reset
+                </a>
+            </div>
+        </ul>
+    </p>
+</div>
+{% endif %}

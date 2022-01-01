@@ -1,0 +1,57 @@
+@import "header";
+
+.entwicklung {
+  border: 1px dashed $red_20;
+  background-color: $red_0;
+  margin-top: 5em;
+  padding: .75em;
+  font-size: .8em;
+
+  ul {
+    margin: 0;
+  }
+
+  .symbol-entwicklung {
+    display: flex;
+    margin-bottom: 1em;
+    color: $red_70;
+
+    &::after {
+      content: "Nur während der Entwicklung";
+      padding-left: .5em;
+      font-weight: 700;
+    }
+  }
+
+  & + & {
+    margin-top: 1.5em;
+  }
+}
+
+.frageadmin {
+  border: 1px dashed $green_20;
+  background-color: $green_0;
+  margin-top: 2em;
+  padding: .75em;
+  font-size: .8em;
+
+  ul {
+    margin: 0;
+  }
+
+  .symbol-entwicklung {
+    display: flex;
+    margin-bottom: 1em;
+    color: $green_70;
+
+    &::after {
+      content: "Nur für Admins Fragenkatalog sichtbar";
+      padding-left: .5em;
+      font-weight: 700;
+    }
+  }
+
+  & + & {
+    margin-top: 1.5em;
+  }
+}

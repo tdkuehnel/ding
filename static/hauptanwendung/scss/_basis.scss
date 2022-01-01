@@ -1,0 +1,53 @@
+@import "vorheader";
+@import "header";
+
+$textfarben: (
+  "rot": $red_70,
+  "grun": $green_50,
+  "blau": $blue_70,
+  "gelb": $yellow_30,
+  "grau": $gray_90,
+);
+
+@each $name, $farbe in $textfarben {
+  .#{$name} {
+    color: $farbe;
+  }
+}
+
+body {
+  padding-top: 5rem;
+}
+
+.haupttext {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.anderertext {
+  text-align: center;
+}
+
+.card-text-height {
+    min-height: 120px;
+}
+.card-header-min-height {
+    min-height: 75px;
+}
+
+.header-text {
+    font-size: 1.2em;
+}
+
+.richtig {
+    background-color: #6fff78;
+}
+
+.falsch {
+    background-color: #ff6f6f;
+}
+
+.header {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
