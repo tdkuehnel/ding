@@ -94,7 +94,7 @@ class ListCtrl(wx.ListCtrl):
         self.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
 
         for knoten in Knoten.objects.all():
-            index = self.InsertItem(self.GetItemCount(), knoten.id, self.idx1)
+            index = self.InsertItem(self.GetItemCount(), knoten.id.hex[:5] + '...', self.idx1)
             #self.SetItem(index, 1, '4534543r3') 
         
 class MainPanel(wx.Panel):
