@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView, PasswordResetConfirmView
+from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordChangeDoneView, PasswordResetConfirmView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -28,7 +28,11 @@ from .forms import AnmeldeForm
 
 class DingLoginView(LoginView):
     form_class = AnmeldeForm
-    redirect_authenticated_user = True
+    template_name = 'hauptanwendung/login.html'
+    #redirect_authenticated_user = True
 
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form), status=401)
+
+class DingLogoutView(LogoutView):
+    next_page = reverse_lazy('index')

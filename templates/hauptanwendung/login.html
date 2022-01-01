@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+
+{% block brotkrumen_aussen %}{% endblock %}
+
+{% block uberschrift %}<h1>Anmeldung</h1>{% endblock %}
+
+
+{% block inhalt %}
+  {% if next %}
+  <div class="info">
+    {% if user.is_authenticated %}
+    Ungenügende Zugriffsrechte.
+    {% else %}
+    Bitte anmelden.
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <p>Du bist bereits angemeldet.</p>
+  <div class="buttons">
+    <a class="button blau" href="{% url 'index' %}">Weiter</a>
+  </div>
+  {% else %}
+  <p>Bitte gebe hier Deinen Benutzernamen und Dein Passwort ein.</p>
+  <form id="anmeldung" class="formular" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+
+    <div class="abschnitt">
+  {% if form.errors %}
+      <div class="fehler"><p class="fehler fehlerabsatz">Fehler bei der Anmeldung. </p><p class="fehler fehlerabsatz">Kontrolliere Deine VHDN und das Passwort.</p> <p class="fehler fehlerabsatz">Passwort vergessen? Melde Dich bei Deinem MSL.</p></div>
+  {% endif %}
+
+      <div class="feld">
+        <div class="beschriftung">{{ form.username.label_tag }}</div>
+        <div class="eingabe">{{ form.username }}</div>
+        <div class="helptext">Der Benutzername kann Deine VHDN sein (nur die Ziffern) oder Dein(e) Rufname(n) mit den ersten drei Stellen Deiner PLZ.</div>
+      </div>
+      <div class="feld">
+        <div class="beschriftung">{{ form.password.label_tag }}</div>
+        <div class="eingabe">{{ form.password }}</div>
+        <div class="helptext">Bitte gebe Dein gültiges Passwort ein.</div>
+      </div>
+
+      <div class="buttons">
+        <button class="button blau" type="submit">Anmelden</button>
+      </div>
+
+    </div>
+
+  </form>
+  <p class="pw_text">Passwort vergessen? Melde Dich bei Deinem MSL.</p>
+  {% endif %}
+{% endblock %}

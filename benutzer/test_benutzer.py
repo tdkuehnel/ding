@@ -30,14 +30,14 @@ class BenutzerFunctionalTest(TestCase):
 
         credentials = {'username': 'name123', 'password': 'kennwort' }
 
-        response = self.client.post('/anmeldung/', credentials, follow=True)
+        response = self.client.post('/benutzer/anmeldung/', credentials, follow=True)
         self.assertTrue(response.context['user'].is_authenticated)
 
-        response = self.client.get('/abmeldung/', follow=True)
+        response = self.client.get('/benutzer/abmeldung/', follow=True)
         self.assertFalse(response.context['user'].is_authenticated)
 
         credentials = {'username': 'name123', 'password': 'kennwort' }
-        response = self.client.post('/anmeldung/', credentials, follow=True)
+        response = self.client.post('/benutzer/anmeldung/', credentials, follow=True)
         self.assertTrue(response.context['user'].is_authenticated)
         #pretty(response.content)
 
