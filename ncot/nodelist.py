@@ -2,6 +2,7 @@ import wx
 
 from knoten.models import Knoten
 from ncot.ncotthread import NCoTThread
+from ncot.nodepanel import NodePanel
 from Main import images
 
 class NodeList(wx.ListCtrl):
@@ -35,4 +36,23 @@ class NodeList(wx.ListCtrl):
             # Für jeden Knoten einen thread erzeugen.
             # Ob das hier die richtige Stelle dafür ist, wird sich noch zeigen.
             NCoTThread(knoten)
+
+        self.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.OnNodeActivate)
+
+    def FindPage(self, notebook, text):
+        for index in range(notebook.GetPageCount()):
+            #import pdb; pdb.set_trace()
+            if notebook.GetPageText(index).endswith(text):
+                return index
+        return None
+
+    def OnNodeActivate(self, event):
+        self.currentItem = event.Index
+        notebook = self.Parent.Parent.Parent.nb
+        self.nbp = NodePanel(notebook)
+        index = self.FindPage(notebook, self.GetItemText(event.Index, 0))
+        if index == None:
+            notebook.AddPage(self.nbp, 'NCoT Node ' + self.GetItemText(event.Index, 0), select=True)
+        else:
+            notebook.SetSelection(index)
         

@@ -10,7 +10,6 @@ import wx.lib.mixins.inspection
 
 from pubsub import pub
 
-from ncot.nodepanel import NodePanel
 from ncot.nodelist import NodeList
 
 # We won't import the images module yet, but we'll assign it to this
@@ -134,11 +133,10 @@ class wxDasDing(wx.Frame):
         self.dying = False
 
         # Create a Notebook
-        self.nb = wx.Notebook(pnl, -1, style=wx.CLIP_CHILDREN)
+        #self.nb = wx.Notebook(pnl, -1, style=wx.CLIP_CHILDREN)
+        self.nb = aui.AuiNotebook(pnl, -1, style=wx.CLIP_CHILDREN)
         self.BuildMenuBar()
 
-        self.nbp = NodePanel(self.nb)
-        self.nb.AddPage(self.nbp, 'NCoT Node')
 
         leftPanel = wx.Panel(pnl, style=wx.TAB_TRAVERSAL|wx.CLIP_CHILDREN)
 
