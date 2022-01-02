@@ -8,8 +8,10 @@ from six.moves import cPickle
 
 import wx.lib.mixins.inspection
 
-from knoten.models import Knoten
+from pubsub import pub
 
+from ncot.nodepanel import NodePanel
+from ncot.nodelist import NodeList
 
 # We won't import the images module yet, but we'll assign it to this
 # global when we do.
@@ -68,35 +70,6 @@ def opj(path):
     return st
 
 
-class ListCtrl(wx.ListCtrl):
-    def __init__(self, parent):
-        wx.ListCtrl.__init__(self, parent, -1,
-                             style = wx.LC_REPORT | wx.LC_VRULES | wx.LC_HRULES | wx.LC_SINGLE_SEL,)
-        #self.InsertColumn(0, 'ID')
-        #self.InsertColumn(1, 'Hash')
-
-        info = wx.ListItem()
-        info.Mask = wx.LIST_MASK_TEXT | wx.LIST_MASK_IMAGE | wx.LIST_MASK_FORMAT
-        info.Image = -1
-        info.Align = 0
-        info.Text = "ID"
-        self.InsertColumn(0, info)
-        
-        #info.Align = wx.LIST_FORMAT_RIGHT
-        #info.Text = "Hash"
-        #self.InsertColumn(1, info)
-        
-        self.SetColumnWidth(0, 120)
-        #self.SetColumnWidth(1, 120)
-
-        self.il = wx.ImageList(16, 16)
-        self.idx1 = self.il.Add(images.aquaflagged.GetBitmap())
-        self.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
-
-        for knoten in Knoten.objects.all():
-            index = self.InsertItem(self.GetItemCount(), knoten.id.hex[:5] + '...', self.idx1)
-            #self.SetItem(index, 1, '4534543r3') 
-        
 class MainPanel(wx.Panel):
     """
     Just a simple derived panel where we override Freeze and Thaw to work
@@ -110,8 +83,10 @@ class MainPanel(wx.Panel):
         if 'wxMSW' in wx.PlatformInfo:
             return super(MainPanel, self).Thaw()
 
+
 class wxDasDing(wx.Frame):
     def __init__(self, parent, title):
+        pub.subscribe(self.OnThreadMessage, 'update')
         wx.Frame.__init__(self, parent, -1, title, size = (970, 720),
                           style=wx.DEFAULT_FRAME_STYLE | wx.NO_FULL_REPAINT_ON_RESIZE)
 
@@ -162,10 +137,13 @@ class wxDasDing(wx.Frame):
         self.nb = wx.Notebook(pnl, -1, style=wx.CLIP_CHILDREN)
         self.BuildMenuBar()
 
+        self.nbp = NodePanel(self.nb)
+        self.nb.AddPage(self.nbp, 'NCoT Node')
+
         leftPanel = wx.Panel(pnl, style=wx.TAB_TRAVERSAL|wx.CLIP_CHILDREN)
 
-        self.tree = ListCtrl(leftPanel)
-        
+        self.tree = NodeList(leftPanel)
+
         self.filter = wx.SearchCtrl(leftPanel, style=wx.TE_PROCESS_ENTER)
         self.filter.ShowCancelButton(True)
         self.filter.Bind(wx.EVT_TEXT_ENTER, self.OnSearch)
@@ -213,8 +191,6 @@ class wxDasDing(wx.Frame):
         self.mgr.Update()
 
         self.mgr.SetAGWFlags(self.mgr.GetAGWFlags() ^ aui.AUI_MGR_TRANSPARENT_DRAG)
-
-        
 
     def BuildMenuBar(self):
 
@@ -354,6 +330,8 @@ class wxDasDing(wx.Frame):
         wx.LogMessage("OnAppActivate: %s" % evt.GetActive())
         evt.Skip()
 
+    def OnThreadMessage(self,arg1, arg2=None):
+        wx.LogMessage("Thread %s Message: %s" % (str(arg2.id)[:5]+'...', arg1))
 
     def OnAllowAuiFloating(self, event):
 
@@ -405,13 +383,15 @@ class MyLog(wx.Log):
 
 
 class MySplashScreen(SplashScreen):
+    SPLASH_SCREEN_MS = 200 # Zeit in ms zur Anzeige
+    SPLASH_SCREEN_START_APP = 200 # Zeit in ms zur Anzeige App
     def __init__(self):
         bmp = wx.Image(opj("bitmaps/splash.png")).ConvertToBitmap()
         SplashScreen.__init__(self, bmp,
                                  wx.adv.SPLASH_CENTRE_ON_SCREEN | wx.adv.SPLASH_TIMEOUT,
-                                 5000, None, -1)
+                                 self.SPLASH_SCREEN_MS, None, -1)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
-        self.fc = wx.CallLater(1000, self.ShowMain)
+        self.fc = wx.CallLater(self.SPLASH_SCREEN_START_APP, self.ShowMain)
 
 
     def OnClose(self, evt):
@@ -440,7 +420,7 @@ class MyApp(wx.App):
         wx.SystemOptions.SetOption("mac.window-plain-transition", 1)
         self.SetAppName("wxPyDemo")
         #self.InitInspection()  # for the InspectionMixin base class
-        
+
         import images as i
         global images
         images = i

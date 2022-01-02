@@ -27,5 +27,3 @@ class WindowTest(unittest.TestCase):
     def testApp(self):
         pass
 
-    def testApp2(self):
-        pass
